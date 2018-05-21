@@ -1,0 +1,21 @@
+//参考地址:https://blog.csdn.net/lmj623565791/article/details/51148825
+
+//上传到jcenter的命令可以使用如下命令
+// gradlew clean build bintrayUpload -PbintrayUser=15198184721 -PbintrayKey=6ed2b779e0759b2acbba667c233d057a032b78d2 -PdryRun=false
+//如果上传完成了可以访问如下地址查看(注意此时是无法直接引用的)
+//https://bintray.com/15198184721/maven
+//你可以在以上网址操作添加到jcenter，然后通过以下网址访问。如果能访问到表示可以引用了
+//https://jcenter.bintray.com/组名称(groupId)
+
+// must be applied after your artifact generating plugin (eg. java / com.android.library)
+apply plugin: 'com.novoda.bintray-release'
+
+//添加
+publish {
+    userOrg = '15198184721'//bintray.com用户名(注意:不带邮箱后面部分的)
+    groupId = 'com.baselibrary'//组名称
+    artifactId = 'baselibrary-release'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'Basic library, is used to quickly create a with the basis of the existing public library project'//描述，不重要
+    website = 'https://github.com/hyman/basetools'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
+}
