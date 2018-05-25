@@ -1,2 +1,96 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.baselibrary"/>
+          package="com.baselibrary">
+
+
+    <application>
+        <!--
+            360插件化框架后台管理的key,如果有自己的管理后台请在项目的 AndroidManifest.xml 添加如下配置
+        -->
+        <!--<meta-data android:name="com.baselibrary_PLUGIN_KEY" android:value=""/>-->
+
+        <!--==============================
+            服务相关配置
+        ==================================-->
+        <!-- 插件管理包中下载SDK相关服务 -->
+        <service android:name="com.qihoo360.replugin.sdk.log.LogService" />
+        <service android:name="com.liulishuo.filedownloader.services.FileDownloadService$SharedMainProcessService" />
+        <service android:name="com.liulishuo.filedownloader.services.FileDownloadService$SeparateProcessService"
+                 android:process=":filedownloader" />
+
+
+        <!--==============================
+                内容提供者相关配置
+        ==================================-->
+        <!-- android7.0后文件访问需要通过内容提供者。否则无法访问 -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fileprovider_path"/>
+        </provider>
+
+        <!-- 在UI进程中安装插件。请参见类的说明 -->
+        <!-- 如果没有这个则会造成插件加载异常：例如预加载不成功等 -->
+        <provider
+            android:name="com.qihoo360.replugin.packages.PluginFastInstallProvider"
+            android:authorities="${applicationId}.loader.p.pip"
+            android:exported="false" >
+        </provider>
+
+        <!--==============================
+                官方宿主库中的坑位
+        ==================================-->
+        <!-- 注意：此文件不要写入与'坑位'配置相关的组件（Activity、Provider），它们由 gradle 插件自动生成） -->
+        <!-- 注意：此文件不要写入与'坑位'配置相关的组件（Activity、Provider），它们由 gradle 插件自动生成） -->
+        <!-- 注意：此文件不要写入与'坑位'配置相关的组件（Activity、Provider），它们由 gradle 插件自动生成） -->
+
+        <!-- ======================================================================== -->
+        <!-- 开始：插件stub -->
+        <!-- Activity坑中的screenSize属性 7.3.0以上才支持 -->
+        <provider
+            android:name="com.qihoo360.replugin.component.process.ProcessPitProviderUI"
+            android:authorities="${applicationId}.loader.p.mainN1"
+            android:exported="false" />
+
+        <provider
+            android:name="com.qihoo360.replugin.component.process.ProcessPitProviderLoader0"
+            android:authorities="${applicationId}.loader.p.main0"
+            android:exported="false"
+            android:process=":loader0" />
+
+        <provider
+            android:name="com.qihoo360.replugin.component.process.ProcessPitProviderLoader1"
+            android:authorities="${applicationId}.loader.p.main1"
+            android:exported="false"
+            android:process=":loader1" />
+
+        <provider
+            android:name="com.qihoo360.replugin.component.provider.PluginPitProviderUI"
+            android:authorities="${applicationId}.Plugin.NP.UIP"
+            android:exported="false" />
+
+        <!-- 结束：插件stub -->
+        <!-- ======================================================================== -->
+
+    </application>
+
+    <!--==============================
+               插件相关权限
+    ==================================-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- 只有当你的应用程序的目标是android 5.0(api级别21)或更高时才需要 -->
+    <uses-feature android:name="android.hardware.location.gps"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+</manifest>

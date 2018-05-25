@@ -1,8 +1,17 @@
 package com.baselibarryapp;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
+
+import com.baselibarryapp.dialog.DialogTestActivity;
+import com.baselibarryapp.http.HttpActivity;
+import com.baselibarryapp.plugins.PluginsActivity;
+import com.baselibarryapp.toast.ToastActivity;
+import com.baselibrary.base.basecomponent.BaseActivity;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * <pre>
@@ -14,11 +23,32 @@ import android.support.v7.app.AppCompatActivity;
  * Others:
  * </pre>
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity{
+
+    @BindView(R.id.pluginsTest)
+    Button bt;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initLayout() {
         setContentView(R.layout.activity_main);
+    }
+
+    @OnClick({R.id.pluginsTest,R.id.dialogTest,R.id.httpTest,R.id.toastTest})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.pluginsTest:
+                startActivity(new Intent(this, PluginsActivity.class));
+                break;
+            case R.id.dialogTest:
+                startActivity(new Intent(this, DialogTestActivity.class));
+                break;
+            case R.id.httpTest:
+                startActivity(new Intent(this, HttpActivity.class));
+                break;
+            case R.id.toastTest:
+//                Toast("提示消息");
+                startActivity(new Intent(this, ToastActivity.class));
+                break;
+        }
     }
 }

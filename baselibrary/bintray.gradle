@@ -1,5 +1,7 @@
 //参考地址:https://blog.csdn.net/lmj623565791/article/details/51148825
 
+//上传到jcenter需要的配置插件(需要在项目根目录的bulid.gradle加入)
+//classpath 'com.novoda:bintray-release:0.8.0'
 //上传到jcenter的命令可以使用如下命令
 // gradlew clean build bintrayUpload -PbintrayUser=15198184721 -PbintrayKey=6ed2b779e0759b2acbba667c233d057a032b78d2 -PdryRun=false
 //如果上传完成了可以访问如下地址查看(注意此时是无法直接引用的)
@@ -14,8 +16,9 @@ apply plugin: 'com.novoda.bintray-release'
 publish {
     userOrg = '15198184721'//bintray.com用户名(注意:不带邮箱后面部分的)
     groupId = 'com.baselibrary'//组名称
-    artifactId = 'baselibrary-release'//项目名称
+    //项目名称(表示接入的是360的插件化框架的宿主库，插件库则是：baselibrary-plugin-release)
+    artifactId = 'baselibrary-host-release'
     publishVersion = '1.0.0'//版本号
     desc = 'Basic library, is used to quickly create a with the basis of the existing public library project'//描述，不重要
-    website = 'https://github.com/hyman/basetools'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
+    website = 'https://github.com/15198184721/BaseLibarryApp.git'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }

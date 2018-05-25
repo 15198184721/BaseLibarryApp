@@ -1,0 +1,19 @@
+所有基础库引入的本地第三方库都在 ../../BaseLibraryIncludeModule 目录中：
+    DialogUtil      :Dialog提示框的导入库
+    sweettips       :Toast提示的库
+
+基础库接入第三方库如下：
+    日志打印库(com.orhanobut:logger:2.2.0)
+    插件化框架宿主(Replugin-1.0.0.jar,内部框架版本：2.2.4)
+
+
+
+包功能说明(com.baselibrary)：
+    acp             :动态权限处理
+    base            :基础包，存放通用的基础包
+    classloader     :宿主自定义的ClassLoader
+    dialog          :通用的Dialog
+    http            :网络请求相关工具库
+    listeners       :各种监听器
+    logutil         :日志输出工具
+    utils           :各种工具类

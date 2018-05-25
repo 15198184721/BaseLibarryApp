@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.baselibarryapp.http.HttpActivity">
+
+    <Button
+        android:id="@+id/httpGet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="get请求"/>
+    <Button
+        android:id="@+id/httpPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="post请求"/>
+    <Button
+        android:id="@+id/updownfile1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上传单个文件"/>
+    <Button
+        android:id="@+id/updownfile2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上传多个文件(List)"/>
+    <Button
+        android:id="@+id/updownfile3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上传多个文件(@PartMap)"/>
+    <Button
+        android:id="@+id/downFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下载文件"/>
+    <Button
+        android:id="@+id/downFile2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下载文件(地址可变)"/>
+
+</LinearLayout>

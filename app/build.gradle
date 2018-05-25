@@ -1,7 +1,5 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -20,14 +18,41 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '26.0.2'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+//注意！！！必须放在"Android{}"之后保证插件管理宿主能读取到applicationId
+apply plugin: 'replugin-host-gradle'
+
+/**
+ * 配置项均为可选配置，默认无需添加
+ * 更多可选配置项参见replugin-host-gradle的RepluginConfig类
+ * 可更改配置项参见 自动生成RePluginHostConfig.java
+ */
+repluginHostConfig {
+    //宿主的一些自定义配置，默认无需修改
+    /**
+     * 是否使用 AppCompat 库
+     * 不需要个性化配置时，无需添加
+     * 如果您的应用需要支持AppComat，则除了在主程序中引入AppComat-v7包以外，
+     * 还需要在宿主的build.gradle中添加下面的代码若，否则无效(不支持则不需要)
+     * 详细参考方法一的文档
+     */
+    useAppCompat = true
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.0.0-beta1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:0.5'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+    implementation project(':baselibrary')
+
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'//原ADT插件。注解处理插件库
 }

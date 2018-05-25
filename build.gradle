@@ -2,6 +2,8 @@
 
 buildscript {
     ext.kotlin_version = '1.1.51'
+    ext.library_version = '26.1.0' //导入的系统库的版本
+
     repositories {
         google()
         jcenter()
@@ -9,9 +11,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        //上传到jcenter需要的配置插件
-        classpath 'com.novoda:bintray-release:0.8.0'
-
+        classpath 'com.qihoo360.replugin:replugin-host-gradle:2.2.4' //插件化框架的配置插件
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

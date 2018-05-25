@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/body"
+    android:layout_width="@dimen/loading_WH"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_ios_roundcorner_progress"
+    android:gravity="center"
+    android:minHeight="100dp"
+    android:minWidth="130dp"
+    android:orientation="vertical"
+    android:paddingBottom="14dip"
+    android:paddingLeft="12dip"
+    android:paddingRight="12dip"
+    android:paddingTop="14dip">
+    <!-- style="?android:attr/progressBarStyle"-->
+    <!--<ProgressBar
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/progressstyleshape"
+        android:indeterminateDuration="1200"
+        style="?android:attr/progressBarStyleSmall"
+        android:max="10000"/>-->
+
+    <com.dialogutil.view.GifMovieView
+        android:id="@+id/iv_loading"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="@null"
+        app:gif="@drawable/loading_large"/>
+
+
+    <TextView
+        android:id="@+id/loading_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="end"
+        android:layout_marginTop="5dp"
+        android:maxLines="3"
+        android:text="@string/dialogutil_loading"
+        android:textColor="#222222"/>
+</LinearLayout>

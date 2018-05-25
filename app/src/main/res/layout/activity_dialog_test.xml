@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="loading加载对话框"/>
+    <Button
+        android:id="@+id/loadingMD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="loading MD类型加载对话框"/>
+    <Button
+        android:id="@+id/buildProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="progress类型对话框"/>
+    <Button
+        android:id="@+id/buildProgressC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="progress类型圆圈对话框"/>
+    <Button
+        android:id="@+id/buildMdAlter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Md类型的Dialog"/>
+    <Button
+        android:id="@+id/ios_bottom_sheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IOS底部列表选择(头像选择)"/>
+    <Button
+        android:id="@+id/btn_md_bs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MD风格的底部自定义提示框"/>
+    <Button
+        android:id="@+id/bottomSheetLv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MD风格的底部ListView提示框"/>
+    <Button
+        android:id="@+id/bottomSheetGv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MD风格的底部GridView提示框"/>
+    <Button
+        android:id="@+id/btn_singlechoose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MD风格单选框"/>
+    <Button
+        android:id="@+id/btn_muluchoose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MD风格多选框"/>
+
+</LinearLayout>

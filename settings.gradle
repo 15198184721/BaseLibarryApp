@@ -1,1 +1,6 @@
-include ':app', ':baselibrary'
+include ':app', ':baselibrary', ':DialogUtil',":sweettips"
+
+//基础库中引入的第三方库
+//Dialog库
+project(':DialogUtil').projectDir = new File("BaseLibraryIncludeModule/DialogUtil")
+project(':sweettips').projectDir = new File("BaseLibraryIncludeModule/sweettips")

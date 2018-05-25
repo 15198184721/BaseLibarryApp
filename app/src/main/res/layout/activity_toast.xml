@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.baselibarryapp.toast.ToastActivity">
+
+    <Button
+        android:id="@+id/toast1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="一个普通的Toast"/>
+    <Button
+        android:id="@+id/toast2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="一个自定义背景普通的Toast"/>
+    <Button
+        android:id="@+id/toast3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="弹出一个短时间顶部的toast"/>
+    <Button
+        android:id="@+id/toast4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="弹出一个长时间顶部的toast"/>
+    <Button
+        android:id="@+id/toast5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义View的toast"/>
+    <Button
+        android:id="@+id/toast6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义的全功能Toast示例"/>
+
+</LinearLayout>

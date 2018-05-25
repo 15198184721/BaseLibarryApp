@@ -1,33 +1,66 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral() //butterknife插件是在maven中心库中
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.8.0' //上传到jcenter需要的配置插件
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'//注解框架(官网的8.8.1无法下载。所以需要降版本或者降gradle版本到2.2.3)
+    }
+}
+
 apply plugin: 'com.android.library'
+//应用注解框架(这样才可以在library中使用butterknife注解框架)
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 26
-
-
-
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    buildToolsVersion '26.0.2'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    compileOnly 'com.android.support:appcompat-v7:26.1.0'
+
+    implementation 'com.orhanobut:logger:2.2.0' //日志输出的库
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4' //内存泄露检查
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4' //内存泄露检查
+
+    api files('libs/RePlugin-1.0.0.jar')//插件管理SDK,1.0包含了宿主库：2.2.4版本
+    api files('libs/download.jar') //插件管理SDK的下载服务库
+    api project(':sweettips') //导入最新的一个本地库(所有本地库采用了链式导入)
+    api 'com.google.code.gson:gson:2.8.2'//SDK中使用的json解析库
+    api 'org.greenrobot:eventbus:3.1.1' //组件间通讯的消息管理库
+    /* rotrofit */
+    api 'com.squareup.retrofit2:retrofit:2.4.0' //网络API能力库 (square 出品的)
+    api 'com.squareup.okhttp3:okhttp:3.10.0' //网络请求库能力 (square 出品的)
+    api 'com.squareup.retrofit2:converter-gson:2.3.0' //直接将json转bean能力库 (square 出品的)
+    api 'com.squareup.retrofit2:converter-scalars:2.3.0' //直接返回原始json的转换器
+    /* 允许使用retrofit+rxjava(rx-android-java) */
+    api 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    api 'com.trello:rxlifecycle:1.0'
+    api 'com.trello:rxlifecycle-components:1.0'
+
+    api 'com.jakewharton:butterknife:8.8.1' //控件绑定框架,插件对外但是注解无法对外,annotationProcessor 引入的需要app的Module重新引入
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'//原ADT插件。注解处理插件库(library中是内部的,app的module需要重新引入)
 }
 
 //配置本地上传脚背配置文件(bintray.gradle是你的上传日志脚本所在位置，第一步复制的文件)

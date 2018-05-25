@@ -1,0 +1,50 @@
+接入RePlgin数组步骤说明:
+
+方法一：
+    1、参考：https://dc.360.cn/doc/RePlugin/103
+
+方法二:
+    1、添加 RePlugin Host Gradle 依赖
+        在项目根目录的 build.gradle（注意：不是 app/build.gradle）中添加 replugin-host-gradle 依赖：
+        buildscript {
+            dependencies {
+                classpath 'com.qihoo360.replugin:replugin-host-gradle:2.2.4'
+                ...
+            }
+        }
+
+    2、添加 repluginhostlibarry 依赖
+        2.1、在 app/build.gradle 中应用 replugin-host-gradle 插件：
+            android {
+                //注意！！！这必须符合Gradle的标准，并避免一些错误
+            }
+
+            //注意！！！必须放在"Android{}"之后保证插件管理宿主能读取到applicationId
+            apply plugin: 'replugin-host-gradle'
+
+            /**
+             * 配置项均为可选配置，默认无需添加
+             * 更多可选配置项参见replugin-host-gradle的RepluginConfig类
+             * 可更改配置项参见 自动生成RePluginHostConfig.java
+             */
+            repluginHostConfig {
+                //宿主的一些自定义配置，默认无需修改
+                 /**
+                 * 是否使用 AppCompat 库
+                 * 不需要个性化配置时，无需添加
+                 * 如果您的应用需要支持AppComat，则除了在主程序中引入AppComat-v7包以外，
+                 * 还需要在宿主的build.gradle中添加下面的代码若，否则无效(不支持则不需要)
+                 * 详细参考方法一的文档
+                 */
+                 useAppCompat = true
+            }
+
+    3、如果开启了混淆需要配置下载库的混淆规则
+        即:
+            您在 app/build.gradle的android.buildTypes.release块
+            下配置了minifyEnabled true
+        那么请在,app/proguard-rules.pro文件中增加如下配置:
+            -keep class com.qihoo360.**{*;}
+            -keep class com.liulishuo.filedownloader.**{*;}
+
+
