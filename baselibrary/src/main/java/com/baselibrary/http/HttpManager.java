@@ -13,10 +13,14 @@ import com.baselibrary.http.body.bean.FileUploadTag;
 import com.baselibrary.http.body.interceptor.ProgressInterceptor;
 import com.baselibrary.http.body.listener.FileUploadProgressListener;
 import com.baselibrary.http.gsonconverter.GsonConverterFactory;
+import com.baselibrary.http.intefaces.Action1;
 import com.baselibrary.http.intefaces.IHttpManager;
 import com.baselibrary.logutil.Lg;
 import com.baselibrary.utils.GsonUtils;
 import com.baselibrary.utils.sdutils.SDUtils;
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -25,21 +29,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okio.ByteString;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
-import rx.Observable;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-
 /**
  * <pre>
  * Author: lcl
@@ -69,6 +70,7 @@ public class HttpManager implements IHttpManager {
      * 默认连接超时时长
      */
     private static final int DEFAULT_TIMEOUT = 5;
+
     /**
      * 应用的上下文
      */
@@ -105,7 +107,9 @@ public class HttpManager implements IHttpManager {
                         //这个用于字符串转换(自定义转换器)
                         .addConverterFactory(ScalarsConverterFactory.create())
                         //添加RxJava支持
-                        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+//                        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                        //添加RxJava2支持
+                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                         //这个用于Json转换(自定义转换器)
                         .addConverterFactory(GsonConverterFactory.create(GsonUtils.getGson()))
                         .build();
@@ -310,85 +314,87 @@ public class HttpManager implements IHttpManager {
 
     //TODO 继承接口的对外派方法开始处(来至接口:IHttpManager)
     @Override
-    public <T> Subscription request(Observable<T> obs, Action1<T> succ){
+    public <T> Disposable request(Observable<T> obs, Action1<T> succ){
         return request(obs,succ,null);
     }
 
     @Override
-    public <T> Subscription request(Observable<T> obs, Action1<T> succ,Action1<T> err){
+    public <T> Disposable request(Observable<T> obs, Action1<T> succ, Action1<T> err){
         return request(
                 BaseApp.getInstan().getResources().getString(R.string.httpLoading),
                 obs,succ);
     }
 
     @Override
-    public <T> Subscription request(String loadingStr, Observable<T> obs, Action1<T> succ){
+    public <T> Disposable request(String loadingStr, Observable<T> obs, Action1<T> succ){
         return request(loadingStr,obs,succ,null);
     }
 
     @Override
-    public <T> Subscription request(String loadingStr, Observable<T> obs, Action1<T> succ,Action1<Throwable> err){
+    public <T> Disposable request(String loadingStr, Observable<T> obs, Action1<T> succ,Action1<Throwable> err){
         Subscriber<T> subscriber = new Subscriber<T>() {
             @Override
-            public void onCompleted() {}
+            public void onSubscribe(Subscription s) {}
             @Override
-            public void onError(Throwable e) {
-                if(err != null)
-                    err.call(e);
-            }
-            @Override
-            public void onNext(T o) {
+            public void onNext(T t) {
                 if(succ != null)
-                    succ.call(o);
+                    succ.call(t);
             }
+            @Override
+            public void onError(Throwable t) {
+                if(err != null)
+                    err.call(t);
+            }
+            @Override
+            public void onComplete() {}
         };
         return request(loadingStr,obs,subscriber);
     }
 
     @Override
-    public <T> Subscription request(String loadMsg, Observable<T> obser, Subscriber<T> subscript) {
+    public synchronized <T> Disposable request(String loadMsg, Observable<T> obser, Subscriber<T> subscript) {
         if(ActivityContext != null && loadMsg != null && loadMsg.length() > 0){
             loadingDialog = ActivityContext.getDialogInterface().loadingMD(loadMsg).show();
         }else if(ActivityContext != null){
             loadingDialog = ActivityContext.getDialogInterface().loadingMD("加载中").show();
         }
-        //可以在这里对数据做统一性处理等，目前制作了基本的操作
-        Subscription subscribe = obser
-                .subscribeOn(Schedulers.newThread())
+        Disposable disposable = obser
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((T t)-> {
-                    if(ActivityContext != null){
-                        loadingDialog = null;
-                        ActivityContext.getDialogInterface().dismissLoading();
-                    }
-                    try {
-                        subscript.onNext(t);
-                    }catch (Throwable e){
-                        e.printStackTrace();
-                        Lg.e("网络请求成功，执行成功后的监听异常，请检查！"+e.toString());
-                    }
-                }, (Throwable throwable)->{
-                    if(ActivityContext != null){
-                        ActivityContext.getDialogInterface().dismissLoading();
-                    }
-                    try {
-                        Lg.e("网络请求异常 "+DATAFORMT.format(new Date())+"："+throwable.toString());
-                        subscript.onError(throwable);
-                    }catch (Throwable e){
-                        e.printStackTrace();
-                    }
-                }, ()->{
-                    if(ActivityContext != null){
-                        ActivityContext.getDialogInterface().dismissLoading();
-                    }
-                    try {
-                        subscript.onCompleted();
-                    }catch (Throwable e){
-                        e.printStackTrace();
-                        Lg.e("执行您设置的监听异常，请检查！"+e.toString());
-                    }
-                });
-        return subscribe;
+                .subscribe(t -> {
+            if(ActivityContext != null){
+                loadingDialog = null;
+                ActivityContext.getDialogInterface().dismissLoading();
+            }
+            try {
+                subscript.onNext(t);
+            }catch (Throwable e){
+                e.printStackTrace();
+                Lg.e("网络请求成功，执行成功后的监听异常，请检查！"+e.toString());
+            }
+        },throwable -> {
+            if(ActivityContext != null){
+                ActivityContext.getDialogInterface().dismissLoading();
+            }
+            try {
+                Lg.e("网络请求异常 "+DATAFORMT.format(new Date())+"："+throwable.toString());
+                subscript.onError(throwable);
+            }catch (Throwable e1){
+                e1.printStackTrace();
+            }
+        },() -> {
+            if(ActivityContext != null){
+                ActivityContext.getDialogInterface().dismissLoading();
+            }
+            try {
+                subscript.onComplete();
+            }catch (Throwable e){
+                e.printStackTrace();
+                Lg.e("执行您设置的监听异常，请检查！"+e.toString());
+            }
+        },disposable1 -> {
+        });
+        return disposable;
     }
 
     @Override

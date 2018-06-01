@@ -16,7 +16,32 @@
             android:id="@+id/startPlugin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="启动插件"/>
+            android:text="启动插件Activity(不存在会触发下载操作)"/>
+        <Button
+            android:id="@+id/startPlugin1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="启动插件Service"/>
+        <Button
+            android:id="@+id/startPlugin2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="停止插件Service"/>
+        <Button
+            android:id="@+id/startPlugin3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="发送插件广播"/>
+        <Button
+            android:id="@+id/startPlugin4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="动态加载插件Fragment"/>
+        <Button
+            android:id="@+id/startPlugin5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="静态Xml加载插件Fragment"/>
 
     </LinearLayout>
 

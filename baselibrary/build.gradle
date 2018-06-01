@@ -44,7 +44,8 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4' //内存泄露检查
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4' //内存泄露检查
 
-    api files('libs/RePlugin-1.0.0.jar')//插件管理SDK,1.0包含了宿主库：2.2.4版本
+    api 'com.qihoo360.replugin:replugin-host-lib:2.2.4'//导入插件化宿主库
+    api files('libs/RePluginSdk-1.2.0.jar')//插件管理SDK,1.2不包含宿主库，所以需要自己导入
     api files('libs/download.jar') //插件管理SDK的下载服务库
     api project(':sweettips') //导入最新的一个本地库(所有本地库采用了链式导入)
     api 'com.google.code.gson:gson:2.8.2'//SDK中使用的json解析库
@@ -55,9 +56,12 @@ dependencies {
     api 'com.squareup.retrofit2:converter-gson:2.3.0' //直接将json转bean能力库 (square 出品的)
     api 'com.squareup.retrofit2:converter-scalars:2.3.0' //直接返回原始json的转换器
     /* 允许使用retrofit+rxjava(rx-android-java) */
-    api 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    api 'com.trello:rxlifecycle:1.0'
-    api 'com.trello:rxlifecycle-components:1.0'
+//    api 'com.squareup.retrofit2:adapter-rxjava:2.1.0' //官方库，不支持rxjava2，所有用了以下库代替
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0' //支持rxjava2的库代替原来rxjava
+
+    /* 导入rxjava2 + rxAndroid */
+    compile "io.reactivex.rxjava2:rxjava:2.1.1"
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     api 'com.jakewharton:butterknife:8.8.1' //控件绑定框架,插件对外但是注解无法对外,annotationProcessor 引入的需要app的Module重新引入
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'//原ADT插件。注解处理插件库(library中是内部的,app的module需要重新引入)

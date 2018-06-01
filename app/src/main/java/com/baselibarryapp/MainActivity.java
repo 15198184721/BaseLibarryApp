@@ -2,15 +2,14 @@ package com.baselibarryapp;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.Button;
 
 import com.baselibarryapp.dialog.DialogTestActivity;
+import com.baselibarryapp.fragmenttest.FragmentTestActivity;
 import com.baselibarryapp.http.HttpActivity;
 import com.baselibarryapp.plugins.PluginsActivity;
 import com.baselibarryapp.toast.ToastActivity;
 import com.baselibrary.base.basecomponent.BaseActivity;
 
-import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -25,15 +24,13 @@ import butterknife.OnClick;
  */
 public class MainActivity extends BaseActivity{
 
-    @BindView(R.id.pluginsTest)
-    Button bt;
-
     @Override
     protected void initLayout() {
         setContentView(R.layout.activity_main);
     }
 
-    @OnClick({R.id.pluginsTest,R.id.dialogTest,R.id.httpTest,R.id.toastTest})
+    @OnClick({R.id.pluginsTest,R.id.dialogTest,R.id.httpTest,R.id.toastTest
+            ,R.id.fragmentTest})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.pluginsTest:
@@ -48,6 +45,9 @@ public class MainActivity extends BaseActivity{
             case R.id.toastTest:
 //                Toast("提示消息");
                 startActivity(new Intent(this, ToastActivity.class));
+                break;
+            case R.id.fragmentTest:
+                startActivity(new Intent(this, FragmentTestActivity.class));
                 break;
         }
     }

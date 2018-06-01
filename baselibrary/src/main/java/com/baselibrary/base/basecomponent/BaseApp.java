@@ -1,8 +1,8 @@
 package com.baselibrary.base.basecomponent;
 
 import com.baselibrary.base.baseabstract.AbstractBaseApp;
-import com.baselibrary.listeners.DefaultHostCallbacks;
-import com.baselibrary.utils.RePluginConfigUtil;
+import com.baselibrary.pluginutil.listeners.DefaultHostCallbacks;
+import com.baselibrary.pluginutil.RePluginConfigUtil;
 
 /**
  * <pre>

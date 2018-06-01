@@ -1,5 +1,6 @@
 package com.baselibrary.base.interfaces;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
@@ -8,6 +9,7 @@ import com.baselibrary.dialog.IDialogUtil;
 import com.baselibrary.http.body.interceptor.ProgressInterceptor;
 import com.baselibrary.http.intefaces.IHttpFromFiedCreate;
 import com.baselibrary.http.intefaces.IHttpManager;
+import com.qihoo360.replugin.model.PluginInfo;
 
 /**
  * <pre>
@@ -124,6 +126,34 @@ public interface IBaseActivity extends IHttpFromFiedCreate {
      */
     void toastTopLong(String msg,int color);
 
+    /**
+     * 跳转页面(方便设置动画)
+     * @param intent :跳转页面的Intent对象
+     * @param closeId :是否关闭当前的页面(0-不关闭，非0-关闭)
+     */
+    void toActivity(Intent intent, int closeId);
+
+    /**
+     * 跳转页面(方便设置动画)
+     * @param toActivityClass :需要跳转到那个页面
+     * @param closeId :是否关闭当前的页面(0-不关闭，非0-关闭)
+     */
+    void toActivity(Class<?> toActivityClass, int closeId);
+
+    /**
+     * 跳转页面。但返回结果的Fragment到页面的跳转
+     * @param toActivityClass 目标的界面
+     * @param requestCode 请求码
+     */
+    void toActivityResult(Class<?> toActivityClass, int requestCode);
+
+    /**
+     * 跳转到目标页面
+     * @param intent 跳转的Intent对象
+     * @param requestCode 请求码
+     */
+    void toActivityResult(Intent intent, int requestCode);
+
 
 
     //TODO 以下是系统已存在的一些默认的订阅方法(继承后需要加上 @Subscribe注解，否则无效)
@@ -133,6 +163,12 @@ public interface IBaseActivity extends IHttpFromFiedCreate {
      * @param progress
      */
     void httpRequestProgress(ProgressInterceptor.NteworkProgress progress);
+
+    /**
+     * 插件安装成功的订阅通知
+     * @param pluginInfo 安装的插件信息
+     */
+    void installPluginSucceed(final PluginInfo pluginInfo);
 
 
 }

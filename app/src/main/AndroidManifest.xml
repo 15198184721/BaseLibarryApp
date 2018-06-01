@@ -13,6 +13,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -23,6 +24,12 @@
         <activity android:name=".http.HttpActivity">
         </activity>
         <activity android:name=".toast.ToastActivity">
+        </activity>
+        <activity android:name=".plugins.TestFragmentActivity">
+        </activity>
+        <activity android:name=".plugins.TestXmlFragmentActivity">
+        </activity>
+        <activity android:name=".fragmenttest.FragmentTestActivity">
         </activity>
     </application>
 

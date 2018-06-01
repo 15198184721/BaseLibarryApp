@@ -1,9 +1,10 @@
 package com.baselibrary.http.intefaces;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.functions.Action1;
+
+import org.reactivestreams.Subscriber;
+
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * <pre>
@@ -21,7 +22,7 @@ public interface IHttpManager extends IHttpFromFiedCreate{
      * @param <T>
      * @return 控制对象
      */
-    <T> Subscription request(Observable<T> obs, Action1<T> succ);
+    <T> Disposable request(Observable<T> obs, Action1<T> succ);
 
     /**
      * 发起一个网络请求
@@ -31,7 +32,7 @@ public interface IHttpManager extends IHttpFromFiedCreate{
      * @param <T>
      * @return
      */
-    <T> Subscription request(Observable<T> obs, Action1<T> succ,Action1<T> err);
+    <T> Disposable request(Observable<T> obs, Action1<T> succ, Action1<T> err);
 
     /**
      * 发起一个网络请求
@@ -41,7 +42,7 @@ public interface IHttpManager extends IHttpFromFiedCreate{
      * @param <T>
      * @return
      */
-    <T> Subscription request(String loadingStr, Observable<T> obs, Action1<T> succ);
+    <T> Disposable request(String loadingStr, Observable<T> obs, Action1<T> succ);
 
     /**
      * 发起一个网络请求
@@ -52,7 +53,7 @@ public interface IHttpManager extends IHttpFromFiedCreate{
      * @param <T>
      * @return
      */
-    <T> Subscription request(String loadingStr, Observable<T> obs, Action1<T> succ, Action1<Throwable> err);
+    <T> Disposable request(String loadingStr, Observable<T> obs, Action1<T> succ, Action1<Throwable> err);
 
     /**
      * 发起一个自定义的文本的加载等待框的网络请求
@@ -61,7 +62,7 @@ public interface IHttpManager extends IHttpFromFiedCreate{
      * @param subscript 订阅者
      * @return 控制对象
      */
-    <T> Subscription request(final String loadMsg, final Observable<T> obser, final Subscriber<T> subscript);
+    <T> Disposable request(final String loadMsg, final Observable<T> obser, final Subscriber<T> subscript);
 
     /**
      * 更新当前的loading内容

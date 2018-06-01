@@ -11,9 +11,8 @@
 包功能说明(com.baselibrary)：
     acp             :动态权限处理
     base            :基础包，存放通用的基础包
-    classloader     :宿主自定义的ClassLoader
     dialog          :通用的Dialog
     http            :网络请求相关工具库
-    listeners       :各种监听器
     logutil         :日志输出工具
+    plugin          :插件化框架宿主相关操作
     utils           :各种工具类

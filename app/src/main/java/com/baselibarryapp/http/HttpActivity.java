@@ -18,9 +18,9 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.OnClick;
+import io.reactivex.disposables.Disposable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import rx.Subscription;
 
 public class HttpActivity extends BaseActivity {
 
@@ -89,7 +89,7 @@ public class HttpActivity extends BaseActivity {
                     httpM.updateLoadingMsg("上传文件:"+tag.getProgress()+"%");
         });
         RequestBody reqbody = createBody("《这个是RequestBody参数的值》");
-        Subscription sub = httpM.request(
+        Disposable sub = httpM.request(
                 "获取数据",
                 getHttpApiInteface(HttpApi.class).updownFile(
                         par,reqbody,"《这个是表单的文字字段内容》"),(s -> {

@@ -1,8 +1,8 @@
-package com.baselibrary.classloader;
+package com.baselibrary.pluginutil.classloader;
 
 import android.util.Log;
 
-import com.baselibrary.utils.PluginUtil;
+import com.baselibrary.pluginutil.PluginUtil;
 import com.qihoo360.replugin.PluginDexClassLoader;
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.model.PluginInfo;

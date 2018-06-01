@@ -1,5 +1,6 @@
 package com.baselibrary.base.baseabstract;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.baselibrary.http.body.listener.FileUploadProgressListener;
 import com.baselibrary.http.intefaces.IHttpManager;
 import com.jet.sweettips.toast.SweetToast;
 import com.jet.sweettips.util.SnackbarUtils;
+import com.qihoo360.replugin.model.PluginInfo;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -72,6 +74,15 @@ public abstract class AbstractBaseActivity extends AppCompatActivity
      * 初始化布局等(如：设置视图等)
      */
     protected abstract void initLayout();
+
+    //TODO 公共的方法，从接口继承而来的方法实现-订阅了事件的方法
+    @Subscribe
+    @Override
+    public void httpRequestProgress(ProgressInterceptor.NteworkProgress progress) {}
+
+    @Subscribe
+    @Override
+    public void installPluginSucceed(PluginInfo pluginInfo) {}
 
     //TODO 公共的方法，从接口继承而来的方法实现
     @Override
@@ -239,10 +250,25 @@ public abstract class AbstractBaseActivity extends AppCompatActivity
         return getHttpManager(false).createBody(MediaType,bString);
     }
 
-    //TODO 公共的方法，从接口继承而来的方法实现-订阅了事件的方法
-    @Subscribe
     @Override
-    public void httpRequestProgress(ProgressInterceptor.NteworkProgress progress) {}
+    public void toActivity(Intent intent, int closeId) {
+
+    }
+
+    @Override
+    public void toActivity(Class<?> toActivityClass, int closeId) {
+
+    }
+
+    @Override
+    public void toActivityResult(Class<?> toActivityClass, int requestCode) {
+
+    }
+
+    @Override
+    public void toActivityResult(Intent intent, int requestCode) {
+
+    }
 
     //TODO 公共的方法，从父类继承而来的方法实现
     @Override

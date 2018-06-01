@@ -1,11 +1,11 @@
-package com.baselibrary.listeners;
+package com.baselibrary.pluginutil.listeners;
 
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.baselibrary.classloader.MHostDexClassLoader;
-import com.baselibrary.classloader.MPluginDexClassLoader;
+import com.baselibrary.pluginutil.classloader.MHostDexClassLoader;
+import com.baselibrary.pluginutil.classloader.MPluginDexClassLoader;
 import com.qihoo360.replugin.PluginDexClassLoader;
 import com.qihoo360.replugin.RePluginClassLoader;
 import com.qihoo360.replugin.model.PluginInfo;
@@ -29,7 +29,7 @@ public class DefaultHostCallbacks extends HostCallbacks {
 
     @Override //插件不存在的回调(可以做下载的逻辑)
     public boolean onPluginNotExistsForActivity(Context context, String s, Intent intent, int i) {
-        Log.e("this","插件不存在:"+getClass().getName());
+        Log.e("this","插件Activity不存在:"+getClass().getName());
         return super.onPluginNotExistsForActivity(context, s, intent, i);
     }
 

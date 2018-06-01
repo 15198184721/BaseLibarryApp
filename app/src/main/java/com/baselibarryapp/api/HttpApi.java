@@ -5,6 +5,7 @@ import com.baselibarryapp.http.beans.IPBean;
 import java.util.List;
 import java.util.Map;
 
+import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -18,7 +19,6 @@ import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
-import rx.Observable;
 
 /**
  * <pre>
@@ -38,7 +38,7 @@ public interface HttpApi {
      * @return
      */
     @GET("http://int.dpool.sina.com.cn/iplookup/iplookup.php")
-    Observable<IPBean> getIp(@Query("format") String format,@Query("ip") String ip);
+    Observable<IPBean> getIp(@Query("format") String format, @Query("ip") String ip);
 
     /**
      * post请求测试，必须加上；@FormUrlEncoded

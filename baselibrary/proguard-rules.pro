@@ -22,3 +22,6 @@
 
 -keep class com.qihoo360.**{*;}
 -keep class com.liulishuo.filedownloader.**{*;}
+
+-keep class com.qihoo360.replugin.sdk.**{*;}
+-keep class com.liulishuo.filedownloader.**{*;}

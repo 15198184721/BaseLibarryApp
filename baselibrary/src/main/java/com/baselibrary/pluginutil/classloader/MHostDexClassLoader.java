@@ -1,4 +1,4 @@
-package com.baselibrary.classloader;
+package com.baselibrary.pluginutil.classloader;
 
 import com.qihoo360.replugin.RePluginClassLoader;
 

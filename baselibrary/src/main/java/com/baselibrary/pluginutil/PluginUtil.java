@@ -1,4 +1,4 @@
-package com.baselibrary.utils;
+package com.baselibrary.pluginutil;
 
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.model.PluginInfo;

@@ -12,4 +12,10 @@ import com.baselibrary.base.baseabstract.AbstractBaseActivity;
  */
 public abstract class BaseActivity extends AbstractBaseActivity {
 
+    //TODO 抽象方法，这里定义了抽象方法。需要子类进行实现的
+    /**
+     * 初始化布局等(如：设置视图等)
+     */
+    protected abstract void initLayout();
+
 }

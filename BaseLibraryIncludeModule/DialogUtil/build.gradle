@@ -26,7 +26,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     //以下的库在在基础库中已经存在，所以此处只在内部生效。免得冲突
-    api "com.android.support:appcompat-v7:$library_version"
-    api "com.android.support:recyclerview-v7:$library_version"
-    api "com.android.support:design:$library_version"
+    api "com.android.support:appcompat-v7:26.1.0"
+    api "com.android.support:recyclerview-v7:26.1.0"
+    api "com.android.support:design:26.1.0"
 }

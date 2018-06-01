@@ -13,7 +13,7 @@ import com.baselibrary.base.basecomponent.BaseApp;
 public class App extends BaseApp {
     @Override
     public String getRePluginKey() {
-        return "";
+        return "qirw43flyjwz";
     }
 
     @Override

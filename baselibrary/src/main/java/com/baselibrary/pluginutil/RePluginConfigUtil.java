@@ -1,7 +1,7 @@
-package com.baselibrary.utils;
+package com.baselibrary.pluginutil;
 
 import com.baselibrary.base.basecomponent.BaseApp;
-import com.baselibrary.listeners.DefalultHostEventCallbacks;
+import com.baselibrary.pluginutil.listeners.DefalultHostEventCallbacks;
 import com.qihoo360.replugin.RePluginConfig;
 import com.qihoo360.replugin.sdk.PluginConfig;
 import com.qihoo360.replugin.sdk.PluginManager;

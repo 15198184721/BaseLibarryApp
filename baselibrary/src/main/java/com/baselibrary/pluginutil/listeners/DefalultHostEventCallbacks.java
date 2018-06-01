@@ -1,8 +1,11 @@
-package com.baselibrary.listeners;
+package com.baselibrary.pluginutil.listeners;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
+import com.baselibrary.base.basecomponent.BaseApp;
 import com.qihoo360.replugin.model.PluginInfo;
 import com.qihoo360.replugin.sdk.HostEventCallbacks;
 
@@ -29,17 +32,33 @@ public class DefalultHostEventCallbacks extends HostEventCallbacks {
 
     @Override //当插件安装成功时触发此逻辑
     public void onInstallPluginSucceed(final PluginInfo pluginInfo) {
+        BaseApp.getInstan().postBus(pluginInfo);//通知订阅
         super.onInstallPluginSucceed(pluginInfo);
         Log.e("this","onInstallPluginSucceed");
     }
 
-    @Override  //当打开Activity成功时触发此逻辑，可在这里做一些APM、打点统计等相关工作
+    @Override //当插件Activity准备分配坑位时执行
+    public void onPrepareAllocPitActivity(Intent intent) {
+        super.onPrepareAllocPitActivity(intent);
+    }
+
+    @Override //当插件Activity即将别打开时执行
+    public void onPrepareStartPitActivity(Context context, Intent intent, Intent pittedIntent) {
+        super.onPrepareStartPitActivity(context, intent, pittedIntent);
+    }
+
+    @Override //当插件Activity所在的坑位被执行“销毁”时被执行
+    public void onActivityDestroyed(Activity activity) {
+        super.onActivityDestroyed(activity);
+    }
+
+    @Override  //启动 Activity 完成
     public void onStartActivityCompleted(String s, String s1, boolean b) {
         super.onStartActivityCompleted(s, s1, b);
         Log.e("this","onStartActivityCompleted");
     }
 
-    @Override
+    @Override  //当插件Service的Binder被释放时被执行
     public void onBinderReleased() {
         super.onBinderReleased();
         Log.e("this","onBinderReleased");

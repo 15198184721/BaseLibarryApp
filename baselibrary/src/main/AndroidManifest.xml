@@ -12,10 +12,13 @@
             服务相关配置
         ==================================-->
         <!-- 插件管理包中下载SDK相关服务 -->
-        <service android:name="com.qihoo360.replugin.sdk.log.LogService" />
-        <service android:name="com.liulishuo.filedownloader.services.FileDownloadService$SharedMainProcessService" />
-        <service android:name="com.liulishuo.filedownloader.services.FileDownloadService$SeparateProcessService"
-                 android:process=":filedownloader" />
+        <service
+            android:name="com.qihoo360.replugin.sdk.log.LogService" />
+        <service
+            android:name="com.liulishuo.filedownloader.services.FileDownloadService$SharedMainProcessService" />
+        <service
+            android:name="com.liulishuo.filedownloader.services.FileDownloadService$SeparateProcessService"
+            android:process=":filedownloader" />
 
 
         <!--==============================
@@ -34,47 +37,11 @@
 
         <!-- 在UI进程中安装插件。请参见类的说明 -->
         <!-- 如果没有这个则会造成插件加载异常：例如预加载不成功等 -->
-        <provider
+        <!--<provider
             android:name="com.qihoo360.replugin.packages.PluginFastInstallProvider"
             android:authorities="${applicationId}.loader.p.pip"
             android:exported="false" >
-        </provider>
-
-        <!--==============================
-                官方宿主库中的坑位
-        ==================================-->
-        <!-- 注意：此文件不要写入与'坑位'配置相关的组件（Activity、Provider），它们由 gradle 插件自动生成） -->
-        <!-- 注意：此文件不要写入与'坑位'配置相关的组件（Activity、Provider），它们由 gradle 插件自动生成） -->
-        <!-- 注意：此文件不要写入与'坑位'配置相关的组件（Activity、Provider），它们由 gradle 插件自动生成） -->
-
-        <!-- ======================================================================== -->
-        <!-- 开始：插件stub -->
-        <!-- Activity坑中的screenSize属性 7.3.0以上才支持 -->
-        <provider
-            android:name="com.qihoo360.replugin.component.process.ProcessPitProviderUI"
-            android:authorities="${applicationId}.loader.p.mainN1"
-            android:exported="false" />
-
-        <provider
-            android:name="com.qihoo360.replugin.component.process.ProcessPitProviderLoader0"
-            android:authorities="${applicationId}.loader.p.main0"
-            android:exported="false"
-            android:process=":loader0" />
-
-        <provider
-            android:name="com.qihoo360.replugin.component.process.ProcessPitProviderLoader1"
-            android:authorities="${applicationId}.loader.p.main1"
-            android:exported="false"
-            android:process=":loader1" />
-
-        <provider
-            android:name="com.qihoo360.replugin.component.provider.PluginPitProviderUI"
-            android:authorities="${applicationId}.Plugin.NP.UIP"
-            android:exported="false" />
-
-        <!-- 结束：插件stub -->
-        <!-- ======================================================================== -->
-
+        </provider>-->
     </application>
 
     <!--==============================

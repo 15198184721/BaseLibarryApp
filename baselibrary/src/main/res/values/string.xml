@@ -3,4 +3,5 @@
     <string name="httpLoading">加载中</string>
     <string name="baseactivity_permission_msg">程序需要：[%s]</string>
     <string name="baseactivity_permission_err">申请的[%s]被拒绝</string>
+    <string name="baseactivity_permission">您拒绝了权限请求</string>
 </resources>
