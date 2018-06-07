@@ -359,7 +359,7 @@ public class HttpManager implements IHttpManager {
             loadingDialog = ActivityContext.getDialogInterface().loadingMD("加载中").show();
         }
         Disposable disposable = obser
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(t -> {
             if(ActivityContext != null){

@@ -13,20 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.baselibrary.base.basecomponent.basemvp;
+package com.baselibrary.base.basecomponent.basemvp.mvpintefaces;
 
 /**
  * 基础主持类，MVP模式Presenter层基础接口
+ * 项目实际使用也可以直接使用:@{@link AbstractBasePresenter}
+ * 也可以使用当前接口自定义实现
  */
-public interface BasePresenter {
+public interface BasePresenter<V extends BaseView,M> {
 
     /**
      * 订阅，开启订阅(也就是加载数据的方法)
+     * 初始化的方法(每次界面显示到前台都会加载一次)
      */
     void subscribe();
 
     /**
      * 取消注册订阅(取消关联的方法)
+     * 当界面从前台切换到后台即会调用此方法
      */
     void unsubscribe();
 

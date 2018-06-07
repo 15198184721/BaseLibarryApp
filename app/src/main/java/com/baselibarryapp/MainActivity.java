@@ -2,14 +2,18 @@ package com.baselibarryapp;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.baselibarryapp.dialog.DialogTestActivity;
 import com.baselibarryapp.fragmenttest.FragmentTestActivity;
 import com.baselibarryapp.http.HttpActivity;
+import com.baselibarryapp.mvpActivity.MvpActivity;
 import com.baselibarryapp.plugins.PluginsActivity;
 import com.baselibarryapp.toast.ToastActivity;
 import com.baselibrary.base.basecomponent.BaseActivity;
+import com.baselibrary.utils.ImageUtil;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -22,15 +26,19 @@ import butterknife.OnClick;
  * Others:
  * </pre>
  */
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity {
+
+    @BindView(R.id.hbImg)
+    ImageView hbImg;
 
     @Override
     protected void initLayout() {
         setContentView(R.layout.activity_main);
+        hbImg.setImageBitmap(ImageUtil.toBlackAndWhite(R.mipmap.ic_launcher));
     }
 
     @OnClick({R.id.pluginsTest,R.id.dialogTest,R.id.httpTest,R.id.toastTest
-            ,R.id.fragmentTest})
+            ,R.id.fragmentTest,R.id.mvp})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.pluginsTest:
@@ -49,6 +57,11 @@ public class MainActivity extends BaseActivity{
             case R.id.fragmentTest:
                 startActivity(new Intent(this, FragmentTestActivity.class));
                 break;
+            case R.id.mvp:
+                startActivity(new Intent(this, MvpActivity.class));
+                break;
         }
     }
+
 }
+

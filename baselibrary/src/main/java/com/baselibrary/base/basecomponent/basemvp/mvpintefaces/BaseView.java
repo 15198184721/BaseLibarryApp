@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.baselibrary.base.basecomponent.basemvp;
+package com.baselibrary.base.basecomponent.basemvp.mvpintefaces;
 
 /**
  * MVP模式的View视图层的基础类

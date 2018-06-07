@@ -3,6 +3,8 @@ package com.baselibrary.base.basecomponent.basemvp;
 import android.support.annotation.Nullable;
 
 import com.baselibrary.base.basecomponent.BaseActivity;
+import com.baselibrary.base.basecomponent.basemvp.mvpintefaces.BasePresenter;
+import com.baselibrary.base.basecomponent.basemvp.mvpintefaces.BaseView;
 
 /**
  * <pre>
@@ -16,7 +18,7 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActiv
         implements BaseView<P> {
 
     @Nullable
-    private P mPresenter = null;
+    protected P mPresenter = null;
 
     //TODO 来自接口BaseView的方法实现
     @Override

@@ -1,4 +1,6 @@
-package com.baselibarryapp.http.beans;
+package com.baselibarryapp.bases;
+
+import com.baselibrary.base.bases.BaseBean;
 
 /**
  * <pre>
@@ -7,7 +9,7 @@ package com.baselibarryapp.http.beans;
  * Description
  * </pre>
  */
-public class IPBean {
+public class IPBean extends BaseBean {
 
     public int ret;
     public int start;

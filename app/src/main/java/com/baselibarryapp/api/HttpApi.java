@@ -1,6 +1,6 @@
 package com.baselibarryapp.api;
 
-import com.baselibarryapp.http.beans.IPBean;
+import com.baselibarryapp.bases.IPBean;
 
 import java.util.List;
 import java.util.Map;
